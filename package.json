@@ -1,0 +1,19 @@
+{
+  "name": "just_stream_it",
+  "version": "1.0.0",
+  "description": "[![forthebadge](https://forthebadge.com/images/badges/uses-html.svg)](https://forthebadge.com)",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./public/css/style.css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vpich/just_stream_it.git"
+  },
+  "author": "vpich",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vpich/just_stream_it/issues"
+  },
+  "homepage": "https://github.com/vpich/just_stream_it#readme"
+}
