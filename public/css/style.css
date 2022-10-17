@@ -1,5 +1,16 @@
-body {
-  color: red;
+body header {
+  background-color: grey;
+  display: flex;
+}
+body section {
+  display: flex;
+  justify-content: center;
+}
+body section h2 {
+  justify-content: center;
+}
+body .best_movie {
+  font-size: 3em;
 }
 
 /*# sourceMappingURL=style.css.map */

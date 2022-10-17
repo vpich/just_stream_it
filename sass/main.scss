@@ -3,5 +3,18 @@ header {
 }
 
 body {
-    color: red;
+    header {
+        background-color: grey;
+        display: flex;
+    }
+    section {
+        display:flex;
+        justify-content: center;
+        h2 {
+            justify-content: center;
+        }
+    }
+    .best_movie {
+        font-size: 3em;
+    }
 }
