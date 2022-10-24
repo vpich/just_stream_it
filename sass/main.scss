@@ -6,15 +6,73 @@ body {
     header {
         background-color: grey;
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h1 {
+            margin: 20px;
+        }
+        li {
+            display: inline;
+            float: left;
+            margin: 20px;
+            font-size: 1.5em;
+            a {
+                display: block;
+            }
+        }
     }
     section {
-        display:flex;
-        justify-content: center;
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        .cat-row {
+        display: inline-flex;
+            .slider {
+                width: 100%;
+                margin: auto;
+                text-align: center;
+                white-space: nowrap;
+                img{
+                    width: 25%;
+                    overflow: hidden;
+                }
+            }
+        }
+
+
         h2 {
             justify-content: center;
         }
-    }
-    .best_movie {
+//         div {
+//             img{
+//                 width: 25%;
+            }
+//         }
+//     }
+    #best_movie {
         font-size: 3em;
+        display: flex;
+        flex-direction: inherit;
+        align-items: center;
+        border: 0.1em black solid;
+        justify-content: space-evenly;
+        div {
+            display: flex;
+            flex-direction: column;
+            button {
+                max-width: 50px;
+                align-self: center;
+            }
+        }
+        img {
+            max-width: 100%;
+            max-height: 500px;
+        }
+    }
+
+    footer {
+        ul {
+            list-style: none;
+        }
     }
 }

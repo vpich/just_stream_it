@@ -1,16 +1,64 @@
 body header {
   background-color: grey;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body header h1 {
+  margin: 20px;
+}
+body header li {
+  display: inline;
+  float: left;
+  margin: 20px;
+  font-size: 1.5em;
+}
+body header li a {
+  display: block;
 }
 body section {
   display: flex;
-  justify-content: center;
+  width: 100%;
+  flex-direction: column;
+}
+body section .cat-row {
+  display: inline-flex;
+}
+body section .cat-row .slider {
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  white-space: nowrap;
+}
+body section .cat-row .slider img {
+  width: 25%;
+  overflow: hidden;
 }
 body section h2 {
   justify-content: center;
 }
-body .best_movie {
+body #best_movie {
   font-size: 3em;
+  display: flex;
+  flex-direction: inherit;
+  align-items: center;
+  border: 0.1em black solid;
+  justify-content: space-evenly;
+}
+body #best_movie div {
+  display: flex;
+  flex-direction: column;
+}
+body #best_movie div button {
+  max-width: 50px;
+  align-self: center;
+}
+body #best_movie img {
+  max-width: 100%;
+  max-height: 500px;
+}
+body footer ul {
+  list-style: none;
 }
 
 /*# sourceMappingURL=style.css.map */
