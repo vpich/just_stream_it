@@ -3,8 +3,9 @@ header {
 }
 
 body {
+    background-color: grey;
     header {
-        background-color: grey;
+        background-color: silver;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -17,13 +18,12 @@ body {
         }
         ul {
             :hover {
-                background-color: blue;
+                background-color: white;
             }
             li {
                 display: flex;
                 float: left;
                 font-size: 1.5em;
-                background-color: pink;
                 height: 50px;
                 align-items: center;
                 padding-left: 20px;
@@ -37,7 +37,7 @@ body {
         font-size: 3em;
         display: flex;
         flex-direction: inherit;
-        align-items: center;
+        align-items: end;
         border: 0.1em black solid;
         background-image: url("../../images/film-0.jpg");
         background-repeat: no-repeat;

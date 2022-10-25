@@ -9,6 +9,17 @@
 
 // Gestion fenêtre modale
 
+const image_test = document.getElementById("image-test")
+console.log(image_test)
+
+fetch("http://localhost:8000/api/v1/titles/").then(function(res){
+    return res.json()
+}).then(function(image){
+    console.log("yo !")
+    const image_url = image["results"][2]["image_url"]
+    console.log(image_url)
+    image_test.src=image_url
+})
 
 async function callApi(url){
     let res = await fetch(url)
