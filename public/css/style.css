@@ -1,5 +1,6 @@
 body {
   background-color: grey;
+  font-family: sans-serif;
 }
 body header {
   background-color: silver;
@@ -67,6 +68,9 @@ body section .cat-row button {
   font-weight: bold;
   z-index: 10;
   color: white;
+}
+body section .cat-row button:hover {
+  background-color: rgba(200, 200, 200, 0.5);
 }
 body section .cat-row .slider {
   margin: auto;

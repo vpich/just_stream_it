@@ -4,6 +4,7 @@ header {
 
 body {
     background-color: grey;
+    font-family: sans-serif;
     header {
         background-color: silver;
         display: flex;
@@ -73,6 +74,9 @@ body {
                 font-weight: bold;
                 z-index: 10;
                 color: white;
+                &:hover {
+                    background-color: rgba(200, 200, 200, 0.5);
+                }
 //                 border-radius: 15%;
             }
             .slider {
