@@ -1,7 +1,3 @@
-header {
-
-}
-
 body {
     background-color: grey;
     font-family: sans-serif;
@@ -40,23 +36,32 @@ body {
         flex-direction: inherit;
         align-items: end;
         border: 0.1em black solid;
-        background-image: url("../../images/film-0.jpg");
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center;
+//         background-image: url("../../images/film-0.jpg");
+//         background-repeat: no-repeat;
+//         background-size: cover;
+//         background-position: center;
         width: 100%;
         height: 500px;
-        padding: 20px;
+//         padding: 20px;
         color: white;
+        justify-content: space-evenly;
         div {
-            text-align: left;
+            text-align: center;
             display: flex;
             flex-direction: column;
+            align-self: center;
+            width: 40%;
             button {
                 max-width: 50px;
                 align-self: center;
                 margin: 20px;
             }
+            #description {
+                font-size: 0.5em;
+            }
+        }
+        img {
+            height: 450px;
         }
     }
 
@@ -84,7 +89,7 @@ body {
                 text-align: center;
                 white-space: nowrap;
                 position: relative;
-                left: -20px;
+                left: -30px;
                 img{
                     width: 15%;
                 }
