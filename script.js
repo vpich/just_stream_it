@@ -1,5 +1,3 @@
-// Récupération des miniatures pour film
-
 const BASE_URL = "http://localhost:8000/api/v1/titles/"
 const genre_filter = "genre="
 const SORT_BY_RATING = "sort_by=-imdb_score"
@@ -8,6 +6,10 @@ const PAGE_FILTER = "page="
 //A améliorer
 //  1 - Gestion slides
 //  2 - Gestion fenêtre modale
+
+//A faire
+// - récupérer des id de films
+// - à partir des id récupérés, extraire les infos du film concerné pour l'injecter où il faut
 
 const genre_list = ["best_rated", "Animation", "Comedy", "Sci-Fi"]
 
@@ -61,7 +63,9 @@ function replaceImage(genre, fetchedFilmIndex, new_image) {
     }).then(function(data){
         for (movie in data) {
             const image_url = data["results"][fetchedFilmIndex]["image_url"]
+            const image_id = data["results"][fetchedFilmIndex]["id"]
             new_image.src = image_url
+            new_image.setAttribute("data-id", image_id)
         }
     })
 }
@@ -95,7 +99,7 @@ async function slide_animation(action, genre, genre_str){
         image.classList.remove("active")
     })
     action(genre, genre_str)
-    await sleep(250)
+    await sleep(150)
     genre.forEach((image) => {
         image.classList.add("active")
     })
@@ -147,6 +151,28 @@ best_animation_button_next.addEventListener("click", function() {
     slide_animation(next_movies_selection, best_animation, "Animation")
 })
 
+let sliders = [{
+    querySelector: "#Animation > .cat-row",
+    name: "Animation"
+}, {
+    querySelector: "#best_rated > .cat-row",
+    name: ""
+}]
+
+sliders.forEach(function(slider) {
+    const animation = document.querySelectorAll("#Animation > .cat-row > .slider > img")
+
+    const animation_button_previous = document.querySelector(`${slider["querySelector"]} > button.previous`)
+    animation_button_previous.addEventListener("click", function() {
+        slide_animation(previous_movies_selection, animation, slider["name"])
+    })
+
+    const animation_button_next = document.querySelector("#Animation > .cat-row > button.next")
+    animation_button_next.addEventListener("click", function() {
+        slide_animation(next_movies_selection, animation, slider["name"])
+    })
+})
+
 //let animation_page = 1
 //let animation_films = []
 //const films = fetch...
@@ -164,7 +190,7 @@ best_animation_button_next.addEventListener("click", function() {
 
 const best_movie_button = document.querySelector("#best_movie > div > button")
 const modal = document.getElementById("modal")
-const modal_button = document.querySelector("#modal > button")
+const modal_button = document.querySelector("#modal-header > div > button")
 
 best_movie_button.addEventListener("click", function() {
     modal.style.display = "block";
@@ -179,5 +205,12 @@ const all_images = document.querySelectorAll("img")
 all_images.forEach((image) => {
     image.addEventListener("click", function() {
         modal.style.display = "block";
+        const id = image.getAttribute("data-id")
+        fetch(`${BASE_URL}${id}`).then(function(res) {
+            return res.json()
+        }).then(function(data){
+                const title = document.getElementById("modal-title")
+                title.innerHTML = data["title"]
+        })
     })
 })

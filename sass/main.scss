@@ -1,6 +1,7 @@
 body {
     background: linear-gradient(0deg, rgba(185,185,185,1) 0%, rgba(93,93,93,1) 100%);
     font-family: sans-serif;
+    margin: 0px;
     header {
         background-color: silver;
         display: flex;
@@ -54,16 +55,23 @@ body {
             align-self: center;
             width: 30%;
             button {
-                max-width: 50px;
+                font-size: 0.4em;
                 align-self: center;
                 margin: 20px;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px black;
+                &:hover {
+                    -webkit-filter: brightness(70%);
+                    cursor: pointer;
+                }
             }
             #title {
                 text-shadow: 5px 5px 5px black;
             }
             #description {
                 font-size: 0.5em;
-                margin: auto;
+                margin-top: 30px;
+                margin-bottom: 30px;
             }
         }
         img {
@@ -107,9 +115,10 @@ body {
                     border-radius: 5px;
                     box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
 //                     margin: auto
-                    display: none;
+                    visibility: hidden;
                     &.active{
                         display: inline;
+                        visibility: visible;
                         animation-duration: 1s;
                         animation-name: slidein;
                         @keyframes slidein {
@@ -122,8 +131,9 @@ body {
                         }
                     }
                     &:hover {
-                        opacity: 0.5;
+                        -webkit-filter: brightness(60%);
                         cursor: pointer;
+                        box-shadow: 3px 3px 3px white;
                     }
                 }
             }
@@ -149,8 +159,9 @@ body {
                     margin-top: 0%;
                 }
             }
-            button {
-                float: right;
+            #modal-header {
+                display: flex;
+                justify-content: space-between;
             }
             img {
                 float: right;

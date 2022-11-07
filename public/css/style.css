@@ -1,6 +1,7 @@
 body {
   background: linear-gradient(0deg, rgb(185, 185, 185) 0%, rgb(93, 93, 93) 100%);
   font-family: sans-serif;
+  margin: 0px;
 }
 body header {
   background-color: silver;
@@ -53,16 +54,23 @@ body #best_movie div {
   width: 30%;
 }
 body #best_movie div button {
-  max-width: 50px;
+  font-size: 0.4em;
   align-self: center;
   margin: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px black;
+}
+body #best_movie div button:hover {
+  -webkit-filter: brightness(70%);
+  cursor: pointer;
 }
 body #best_movie div #title {
   text-shadow: 5px 5px 5px black;
 }
 body #best_movie div #description {
   font-size: 0.5em;
-  margin: auto;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 body #best_movie img {
   height: 450px;
@@ -104,10 +112,11 @@ body section .cat-row .slider img {
   width: 15%;
   border-radius: 5px;
   box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
-  display: none;
+  visibility: hidden;
 }
 body section .cat-row .slider img.active {
   display: inline;
+  visibility: visible;
   animation-duration: 1s;
   animation-name: slidein;
 }
@@ -120,8 +129,9 @@ body section .cat-row .slider img.active {
   }
 }
 body section .cat-row .slider img:hover {
-  opacity: 0.5;
+  -webkit-filter: brightness(60%);
   cursor: pointer;
+  box-shadow: 3px 3px 3px white;
 }
 body section#modal {
   display: none;
@@ -145,8 +155,9 @@ body section#modal {
     margin-top: 0%;
   }
 }
-body section#modal button {
-  float: right;
+body section#modal #modal-header {
+  display: flex;
+  justify-content: space-between;
 }
 body section#modal img {
   float: right;
