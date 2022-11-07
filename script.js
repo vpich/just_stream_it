@@ -86,6 +86,21 @@ genre_list.forEach(function(genre) {
 //
 const best_movies = document.querySelectorAll(`#best_rated > .cat-row > .slider > img`)
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function slide_animation(action, genre, genre_str){
+    genre.forEach((image) => {
+        image.classList.remove("active")
+    })
+    action(genre, genre_str)
+    await sleep(250)
+    genre.forEach((image) => {
+        image.classList.add("active")
+    })
+}
+
 let number_click = 0
 
 function previous_movies_selection(genre, genre_str) {
@@ -109,12 +124,12 @@ function next_movies_selection(genre, genre_str) {
 
 const best_movies_button_previous = document.querySelector("#best_rated > .cat-row > button.previous")
 best_movies_button_previous.addEventListener("click", function() {
-    previous_movies_selection(best_movies, "")
+    slide_animation(previous_movies_selection, best_movies, "")
 })
 
 const best_movies_button_next = document.querySelector("#best_rated > .cat-row > button.next")
 best_movies_button_next.addEventListener("click", function() {
-    next_movies_selection(best_movies, "")
+    slide_animation(next_movies_selection, best_movies, "")
 })
 
 //
@@ -124,12 +139,12 @@ const best_animation = document.querySelectorAll("#Animation > .cat-row > .slide
 
 const best_animation_button_previous = document.querySelector("#Animation > .cat-row > button.previous")
 best_animation_button_previous.addEventListener("click", function() {
-    previous_movies_selection(best_animation, "Animation")
+    slide_animation(previous_movies_selection, best_animation, "Animation")
 })
 
 const best_animation_button_next = document.querySelector("#Animation > .cat-row > button.next")
 best_animation_button_next.addEventListener("click", function() {
-    next_movies_selection(best_animation, "Animation")
+    slide_animation(next_movies_selection, best_animation, "Animation")
 })
 
 //let animation_page = 1

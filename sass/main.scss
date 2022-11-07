@@ -1,5 +1,5 @@
 body {
-    background-color: grey;
+    background: linear-gradient(0deg, rgba(185,185,185,1) 0%, rgba(93,93,93,1) 100%);
     font-family: sans-serif;
     header {
         background-color: silver;
@@ -10,6 +10,7 @@ body {
         height: 50px;
         width: 100%;
         z-index: 20;
+        border-radius: 5px;
         h1 {
             margin: 20px;
         }
@@ -25,6 +26,10 @@ body {
                 align-items: center;
                 padding-left: 20px;
                 padding-right: 20px;
+                a {
+                    text-decoration: none;
+                    color: black;
+                }
             }
         }
 
@@ -35,33 +40,36 @@ body {
         display: flex;
         flex-direction: inherit;
         align-items: end;
-        border: 0.1em black solid;
-//         background-image: url("../../images/film-0.jpg");
-//         background-repeat: no-repeat;
-//         background-size: cover;
-//         background-position: center;
+        background: linear-gradient(308deg, rgba(140,140,140,0.5) 0%, rgba(22,22,22,0.5) 70%);
         width: 100%;
         height: 500px;
-//         padding: 20px;
+        padding: 10px;
         color: white;
         justify-content: space-evenly;
+        border-radius: 20px;
         div {
             text-align: center;
             display: flex;
             flex-direction: column;
             align-self: center;
-            width: 40%;
+            width: 30%;
             button {
                 max-width: 50px;
                 align-self: center;
                 margin: 20px;
             }
+            #title {
+                text-shadow: 5px 5px 5px black;
+            }
             #description {
                 font-size: 0.5em;
+                margin: auto;
             }
         }
         img {
             height: 450px;
+            border-radius: 10px;
+            box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
         }
     }
 
@@ -72,6 +80,7 @@ body {
         overflow: hidden;
         .cat-row {
         display: inline-flex;
+        padding: 5px;
             button{
                 background-color: rgba(100, 100, 100, 0.5);
                 border: none;
@@ -79,19 +88,39 @@ body {
                 font-weight: bold;
                 z-index: 10;
                 color: white;
+                cursor: pointer;
+                border-radius: 5px;
+                box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
                 &:hover {
                     background-color: rgba(200, 200, 200, 0.5);
                 }
-//                 border-radius: 15%;
             }
             .slider {
                 margin: auto;
-                text-align: center;
+//                 text-align: center;
                 white-space: nowrap;
                 position: relative;
                 left: -30px;
+                font-family: monospace;
                 img{
                     width: 15%;
+                    border-radius: 5px;
+                    box-shadow: 3px 3px 3px rgba(0, 0, 0, .5);
+//                     margin: auto
+                    display: none;
+                    &.active{
+                        display: inline;
+                        animation-duration: 1s;
+                        animation-name: slidein;
+                        @keyframes slidein {
+                            from {
+                                margin-left: 100%;
+                            }
+                            to {
+                                margin-left: 0%;
+                            }
+                        }
+                    }
                 }
             }
         }
