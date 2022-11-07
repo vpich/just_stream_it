@@ -5,7 +5,7 @@ const genre_filter = "genre="
 const SORT_BY_RATING = "sort_by=-imdb_score"
 const PAGE_FILTER = "page="
 
-//A faire
+//A améliorer
 //  1 - Gestion slides
 //  2 - Gestion fenêtre modale
 
@@ -157,3 +157,27 @@ best_animation_button_next.addEventListener("click", function() {
 //    animation_films.push(next_films)
 //    replace_images() : à partir de animation_films et animation_page, savoir lesquels mettre
 //})
+
+//
+// Gestion fenêtre modale
+//
+
+const best_movie_button = document.querySelector("#best_movie > div > button")
+const modal = document.getElementById("modal")
+const modal_button = document.querySelector("#modal > button")
+
+best_movie_button.addEventListener("click", function() {
+    modal.style.display = "block";
+})
+
+modal_button.addEventListener("click", function() {
+    modal.style.display = "none";
+})
+
+const all_images = document.querySelectorAll("img")
+
+all_images.forEach((image) => {
+    image.addEventListener("click", function() {
+        modal.style.display = "block";
+    })
+})

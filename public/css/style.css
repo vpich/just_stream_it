@@ -119,6 +119,38 @@ body section .cat-row .slider img.active {
     margin-left: 0%;
   }
 }
+body section .cat-row .slider img:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+body section#modal {
+  display: none;
+  padding: 20px;
+  position: fixed;
+  z-index: 50;
+  background: black;
+  color: white;
+  border-radius: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  animation: slidetop 1s;
+}
+@keyframes slidetop {
+  from {
+    margin-top: 100%;
+  }
+  to {
+    margin-top: 0%;
+  }
+}
+body section#modal button {
+  float: right;
+}
+body section#modal img {
+  float: right;
+}
 body footer ul {
   list-style: none;
 }

@@ -121,7 +121,39 @@ body {
                             }
                         }
                     }
+                    &:hover {
+                        opacity: 0.5;
+                        cursor: pointer;
+                    }
                 }
+            }
+        }
+        &#modal {
+            display: none;
+            padding: 20px;
+            position: fixed;
+            z-index: 50;
+            background: black;
+            color: white;
+            border-radius: 20px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            animation: slidetop 1s;
+            @keyframes slidetop {
+                from {
+                    margin-top: 100%;
+                }
+                to {
+                    margin-top: 0%;
+                }
+            }
+            button {
+                float: right;
+            }
+            img {
+                float: right;
             }
         }
     }
