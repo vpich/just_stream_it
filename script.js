@@ -240,8 +240,31 @@ all_images.forEach((image) => {
         fetch(`${BASE_URL}${id}`).then(function(res) {
             return res.json()
         }).then(function(data){
-                const title = document.getElementById("modal-title")
-                title.innerHTML = data["title"]
+            const title = document.getElementById("modal-title")
+            title.innerHTML = data["title"]
+            const image = document.querySelector("#modal-image > img")
+            image.src = data["image_url"]
+            const genre = document.getElementById("genre")
+            genre.innerHTML = "Genres: " + data["genres"]
+            const release = document.getElementById("release")
+            release.innerHTML = "Date de sortie: " + data["date_published"]
+            const rated = document.getElementById("rate")
+            rated.innerHTML = "Rated: " + data["rated"]
+            const score = document.getElementById("imdb-score")
+            score.innerHTML = "Score IMBD: " + data["imdb_score"]
+            const directors = document.getElementById("director")
+            director.innerHTML = "Réalisateur: " + data["directors"]
+            const actors = document.getElementById("actors")
+            actors.innerHTML = "Liste des acteurs: " + data["actors"]
+            const duration = document.getElementById("duration")
+            duration.innerHTML = "Durée du film: " + data["duration"]
+            const origin = document.getElementById("origin")
+            origin.innerHTML = "Pays d'origine: " + data["countries"]
+            const box_office = document.getElementById("box-office")
+            box_office.innerHTML = "Résultat au Box Office: " + data["avg_vote"]
+            const description = document.getElementById("long_description")
+            description.innerHTML = "Description:<br/>" + data["long_description"]
+
         })
     })
 })

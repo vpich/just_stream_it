@@ -16,113 +16,122 @@
             </ul>
         </header>
 
-        <section id="modal">
-            <div id="modal-header">
-                <h2 id="modal-title">Titre du film</h2>
+        <main>
+            <section id="modal">
+                <div id="modal-header">
+                    <h2 id="modal-title">Titre du film</h2>
+                    <div>
+                        <button>X</button>
+                    </div>
+
+                </div>
+
+                <div id="modal-image">
+                    <img src="images/film-0.jpg" alt="image du film" />
+                </div>
+
+                <div id="modal-content">
+                    <p id="genre">Le genre complet du film</p>
+                    <p id="release">Sa date de sortie</p>
+                    <p id="rate">Son Rated</p>
+                    <p id="imdb-score">Son score Imdb</p>
+                    <p id="director">Son réalisateur</p>
+                    <p id="actors">La liste des acteurs</p>
+                    <p id="duration">Sa durée</p>
+                    <p id="origin">Le pays d’origine</p>
+                    <p id="box-office">Le résultat au Box Office</p>
+                    <div id="modal-description">
+                        <p id="long_description">Le résumé du film</p>
+                    </div>
+
+                </div>
+            </section>
+
+            <section id="best_movie">
+                <!-- Meilleur film -->
                 <div>
-                    <button>X</button>
+                    <a id="title">Meilleur film</a>
+                    <p id="description"></p>
+                    <button>Plus d'infos</button>
                 </div>
+                <img src="images/film-0.jpg" alt="Image de la vidéo"/>
+            </section>
 
-            </div>
+            <section id="best_rated">
+<!--                <div>-->
+                    <!-- Films les mieux notés -->
+                    <h2>Films les mieux notés</h2>
+                    <div class="cat-row">
+                        <button class="previous"><</button>
+                        <div class="slider">
+                            <img class="active" src="images/film-1.jpg" alt="Film 1" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 2" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 3" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 4" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 5" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 6" />
+                            <img class="active" src="images/film-1.jpg" alt="Film 7" />
+                        </div>
+                        <button class="next">></button>
+                    </div>
+<!--                </div>-->
+            </section>
 
-            <div>
-                <img src="images/film-0.jpg" alt="image du film" />
-                <p>Le genre complet du film</p>
-                <p>Sa date de sortie</p>
-                <p>Son Rated</p>
-                <p>Son score Imdb</p>
-                <p>Son réalisateur</p>
-                <p>La liste des acteurs</p>
-                <p>Sa durée</p>
-                <p>Le pays d’origine</p>
-                <p>Le résultat au Box Office</p>
-                <p>Le résumé du film</p>
-            </div>
-        </section>
-
-        <section id="best_movie">
-            <!-- Meilleur film -->
-            <div>
-                <a id="title">Meilleur film</a>
-                <p id="description"></p>
-                <button>Plus d'infos</button>
-            </div>
-            <img src="images/film-0.jpg" alt="Image de la vidéo"/>
-        </section>
-
-        <section id="best_rated">
-            <!-- Films les mieux notés -->
-            <h2>Films les mieux notés</h2>
-            <div class="cat-row">
-                <button class="previous"><</button>
-                <div class="slider">
-                    <img class="active" src="images/film-1.jpg" alt="Film 1" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 2" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 3" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 4" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 5" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 6" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 7" />
+            <section id="Animation">
+                <!-- Catégorie 1 -->
+                <h2>Catégorie Animation</h2>
+                <div class="cat-row">
+                    <button class="previous"><</button>
+                    <div class="slider">
+                        <img class="active" src="images/film-1.jpg" alt="Film 1" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 2" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 3" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 4" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 5" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 6" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 7" />
+                    </div>
+                    <button class="next">></button>
                 </div>
-                <button class="next">></button>
-            </div>
-        </section>
+            </section>
 
-        <section id="Animation">
-            <!-- Catégorie 1 -->
-            <h2>Catégorie Animation</h2>
-            <div class="cat-row">
-                <button class="previous"><</button>
-                <div class="slider">
-                    <img class="active" src="images/film-1.jpg" alt="Film 1" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 2" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 3" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 4" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 5" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 6" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 7" />
+            <section id="Comedy">
+                <!-- Catégorie 2 -->
+                <h2>Catégorie Comédie</h2>
+                <div class="cat-row">
+                    <button class="previous"><</button>
+                    <div class="slider">
+                        <img class="active" src="images/film-1.jpg" alt="Film 1" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 2" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 3" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 4" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 5" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 6" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 7" />
+                    </div>
+                    <button class="next">></button>
                 </div>
-                <button class="next">></button>
-            </div>
-        </section>
+            </section>
 
-        <section id="Comedy">
-            <!-- Catégorie 2 -->
-            <h2>Catégorie Comédie</h2>
-            <div class="cat-row">
-                <button class="previous"><</button>
-                <div class="slider">
-                    <img class="active" src="images/film-1.jpg" alt="Film 1" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 2" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 3" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 4" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 5" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 6" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 7" />
+            <section id="Sci-Fi">
+                <!-- Catégorie 3 -->
+                <h2>Catégorie Sci-Fi</h2>
+                <div class="cat-row">
+                    <button class="previous"><</button>
+                    <div class="slider">
+                        <img class="active" src="images/film-1.jpg" alt="Film 1" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 2" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 3" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 4" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 5" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 6" />
+                        <img class="active" src="images/film-1.jpg" alt="Film 7" />
+                    </div>
+                    <button class="next">></button>
                 </div>
-                <button class="next">></button>
-            </div>
-        </section>
+            </section>
 
-        <section id="Sci-Fi">
-            <!-- Catégorie 3 -->
-            <h2>Catégorie Sci-Fi</h2>
-            <div class="cat-row">
-                <button class="previous"><</button>
-                <div class="slider">
-                    <img class="active" src="images/film-1.jpg" alt="Film 1" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 2" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 3" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 4" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 5" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 6" />
-                    <img class="active" src="images/film-1.jpg" alt="Film 7" />
-                </div>
-                <button class="next">></button>
-            </div>
-        </section>
-
-
+        </main>
 
         <footer>
             <ul>
