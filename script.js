@@ -7,10 +7,6 @@ const PAGE_FILTER = "page="
 //  1 - Gestion slides
 //  2 - Gestion fenêtre modale
 
-//A faire
-// - récupérer des id de films
-// - à partir des id récupérés, extraire les infos du film concerné pour l'injecter où il faut
-
 const genre_list = ["best_rated", "Animation", "Comedy", "Sci-Fi"]
 
 //
@@ -104,40 +100,48 @@ async function slide_animation(action, genre, genre_str, category_click){
     genre.forEach((image) => {
         image.classList.remove("active")
     })
-    action(genre, genre_str, category_click)
+    click_function = action(genre, genre_str, category_click)
+    console.log(click_function)
     await sleep(150)
     genre.forEach((image) => {
         image.classList.add("active")
     })
+    return click_function
 }
 
 function previous_movies_selection(genre, genre_str, category_click) {
-    if (category_click > 0) {
-        category_click -= 1
+    click_function = category_click
+    console.log(click_function)
+    if (click_function > 0) {
+        click_function -= 1
         genre.forEach((image, index) => {
-            replaceImage(genre_str, index+=(7 * category_click), image)
+            replaceImage(genre_str, index+=(7 * click_function), image)
         })
     } else {
     console.log("On est au début")
     }
+    return click_function
 }
 
 function next_movies_selection(genre, genre_str, category_click) {
-    category_click += 1
+    click_function = category_click.result
+    click_function += 1
     genre.forEach((image, index) => {
-        replaceImage(genre_str, index+=(7 * category_click), image)
+        replaceImage(genre_str, index+=(7 * click_function), image)
     })
-    console.log(category_click)
+    console.log(click_function)
+    return click_function
 }
 
 const best_movies_button_previous = document.querySelector("#best_rated > .cat-row > button.previous")
 best_movies_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, best_movies, "", best_rated_click)
+    best_rated_click = slide_animation(previous_movies_selection, best_movies, "", best_rated_click)
 })
 
 const best_movies_button_next = document.querySelector("#best_rated > .cat-row > button.next")
 best_movies_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, best_movies, "", best_rated_click)
+    best_rated_click = slide_animation(next_movies_selection, best_movies, "", best_rated_click)
+    console.log(best_rated_click)
 })
 
 //
@@ -268,3 +272,18 @@ all_images.forEach((image) => {
         })
     })
 })
+
+dictionnaire_pour_modale = [
+    "title",
+    "image_url",
+    "genres",
+    "date_published",
+    "rated",
+    "imdb_score",
+    "directors",
+    "actors",
+    "duration",
+    "countries",
+    "avg_vote",
+    "long_description"
+]
