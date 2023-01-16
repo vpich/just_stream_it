@@ -101,17 +101,15 @@ async function slide_animation(action, genre, genre_str, category_click){
     genre.forEach((image) => {
         image.classList.remove("active")
     })
-    click_function = action(genre, genre_str, category_click)
-//    console.log(click_function)
+    number_click = action(genre, genre_str, category_click)
     await sleep(150)
     genre.forEach((image) => {
         image.classList.add("active")
     })
-    return click_function
+    return number_click
 }
 
 function previous_movies_selection(genre, genre_str, category_click) {
-    console.log(category_click)
     if (category_click > 0) {
         category_click -= 1
         genre.forEach((image, index) => {
@@ -124,86 +122,52 @@ function previous_movies_selection(genre, genre_str, category_click) {
 }
 
 function next_movies_selection(genre, genre_str, category_click) {
-    console.log(genre, genre_str, category_click)
     category_click += 1
     genre.forEach((image, index) => {
         replaceImage(genre_str, index+=(7 * category_click), image)
     })
-    console.log(category_click)
     return category_click
 }
 
-const best_movies_button_previous = document.querySelector("#best_rated > .cat-row > button.previous")
-best_movies_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, best_movies, "", best_rated_click).then(response => {
-        console.log(response);
-        best_rated_click = response;
+let sliders = [{
+    querySelector: "#best_rated > .cat-row",
+    name: "",
+    category_click: best_rated_click
+}, {
+    querySelector: "#Animation > .cat-row",
+    name: "Animation",
+    category_click: animation_click
+}, {
+    querySelector: "#Comedy > .cat-row",
+    name: "Comedy",
+    category_click: comedy_click
+}, {
+    querySelector: "#Sci-Fi > .cat-row",
+    name: "Sci-Fi",
+    category_click: scifi_click
+}]
+
+
+sliders.forEach(function(slider) {
+    const genre = document.querySelectorAll(`${slider["querySelector"]} > .slider > img`)
+
+    const genre_button_previous = document.querySelector(`${slider["querySelector"]} > button.previous`)
+    genre_button_previous.addEventListener("click", function() {
+        slide_animation(previous_movies_selection, genre, slider["name"], slider["category_click"]).then(response => {
+            slider["category_click"] = response
+            console.log(slider["category_click"])
+        })
+    })
+
+    const genre_button_next = document.querySelector(`${slider["querySelector"]} > button.next`)
+    genre_button_next.addEventListener("click", function() {
+        slide_animation(next_movies_selection, genre, slider["name"], slider["category_click"]).then(response => {
+            slider["category_click"] = response;
+            console.log(slider["category_click"]);
+        })
     })
 })
 
-const best_movies_button_next = document.querySelector("#best_rated > .cat-row > button.next")
-best_movies_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, best_movies, "", best_rated_click).then(response => {
-        console.log(response);
-        best_rated_click = response;
-    })
-})
-
-//
-//Slide des films d'animation
-//
-const animation = document.querySelectorAll("#Animation > .cat-row > .slider > img")
-
-const animation_button_previous = document.querySelector("#Animation > .cat-row > button.previous")
-animation_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, animation, "Animation", animation_click).then(response => {
-        console.log(response)
-        animation_click = response
-    })
-})
-
-const animation_button_next = document.querySelector("#Animation > .cat-row > button.next")
-animation_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, animation, "Animation", animation_click).then(response => {
-        console.log(response)
-        animation_click = response
-    })
-})
-
-//
-// Slides des comédies
-//
-
-const comedy = document.querySelectorAll("#Comedy > .cat-row > .slider > img")
-
-const comedy_button_previous = document.querySelector("#Comedy > .cat-row > button.previous")
-comedy_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, comedy, "Comedy", comedy_click).then(response => {
-        console.log(response)
-        comedy_click = response
-    })
-})
-
-const comedy_button_next = document.querySelector("#Comedy > .cat-row > button.next")
-comedy_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, comedy, "Comedy", comedy_click).then(response => {
-        console.log(response)
-        comedy_click = response
-    })
-})
-//
-// Slides des Sci-Fi
-//
-
-const sci_fi = document.querySelectorAll("#Sci-Fi > .cat-row > .slider > img")
-
-const sci_fi_button_previous = document.querySelector("#Sci-Fi > .cat-row > button.previous")
-sci_fi_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, sci_fi, "Sci-Fi", scifi_click).then(response => {
-        console.log(response)
-        scifi_click = response
-    })
-})
 
 const sci_fi_button_next = document.querySelector("#Sci-Fi > .cat-row > button.next")
 sci_fi_button_next.addEventListener("click", function() {
@@ -212,35 +176,6 @@ sci_fi_button_next.addEventListener("click", function() {
         scifi_click = response
     })
 })
-
-//let sliders = [{
-//    querySelector: "#best_rated > .cat-row",
-//    name: ""
-//}, {
-//    querySelector: "#Animation > .cat-row",
-//    name: "Animation"
-//}, {
-//    querySelector: "#Comedy > .cat-row",
-//    name: "Comedy"
-//}, {
-//    querySelector: "#Sci-Fi > .cat-row",
-//    name: "Sci-Fi"
-//}]
-//
-//
-//sliders.forEach(function(slider) {
-//    const genre = document.querySelectorAll(`#${"querySelector"} > .slider > img`)
-//
-//    const genre_button_previous = document.querySelector(`${slider["querySelector"]} > button.previous`)
-//    genre_button_previous.addEventListener("click", function() {
-//        slide_animation(previous_movies_selection, genre, slider["name"], best_rated_click)
-//    })
-//
-//    const genre_button_next = document.querySelector(`${slider["querySelector"]} > button.next`)
-//    genre_button_next.addEventListener("click", function() {
-//        slide_animation(next_movies_selection, genre, slider["name"], best_rated_click)
-//    })
-//})
 
 //
 // Gestion fenêtre modale
