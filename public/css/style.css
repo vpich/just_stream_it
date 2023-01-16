@@ -18,12 +18,29 @@ body header {
   border-radius: 5px;
   top: 0px;
 }
+@media screen and (max-width: 599px) {
+  body header {
+    flex-direction: column;
+    height: auto;
+  }
+}
 body header h1 {
   margin: 20px;
   color: white;
 }
+@media screen and (max-width: 599px) {
+  body header h1 {
+    margin: auto;
+  }
+}
 body header ul :hover {
   background-color: #266b7c;
+}
+@media screen and (max-width: 599px) {
+  body header ul {
+    margin: auto;
+    padding: unset;
+  }
 }
 body header ul li {
   display: flex;
@@ -42,6 +59,11 @@ body main {
   width: 90vw;
   margin: auto;
 }
+@media screen and (max-width: 599px) {
+  body main {
+    width: 98%;
+  }
+}
 body #best_movie {
   font-size: 3em;
   display: flex;
@@ -56,12 +78,24 @@ body #best_movie {
   margin-top: 50px;
   padding: 0px;
 }
+@media screen and (max-width: 599px) {
+  body #best_movie {
+    margin-top: 100px;
+    font-size: 2em;
+    flex-direction: column-reverse;
+  }
+}
 body #best_movie div {
   text-align: center;
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 30%;
+}
+@media screen and (max-width: 599px) {
+  body #best_movie div {
+    width: 90%;
+  }
 }
 body #best_movie div button {
   font-size: 0.4em;
@@ -71,6 +105,11 @@ body #best_movie div button {
   box-shadow: 2px 2px 2px #8d8d8d;
   border: 0px;
   padding: 5px 15px;
+}
+@media screen and (max-width: 599px) {
+  body #best_movie div button {
+    margin: auto;
+  }
 }
 body #best_movie div button:hover {
   -webkit-filter: brightness(70%);
@@ -90,6 +129,12 @@ body #best_movie img {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
   align-self: center;
 }
+@media screen and (max-width: 599px) {
+  body #best_movie img {
+    width: 50%;
+    height: auto;
+  }
+}
 body section {
   display: flex;
   width: 100%;
@@ -99,6 +144,11 @@ body section {
 body section .cat-row {
   display: inline-flex;
   padding: 5px;
+}
+@media screen and (max-width: 599px) {
+  body section .cat-row {
+    padding: 0;
+  }
 }
 body section .cat-row button {
   background-color: rgba(100, 100, 100, 0.5);
@@ -110,6 +160,11 @@ body section .cat-row button {
   cursor: pointer;
   border-radius: 5px;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+@media screen and (max-width: 599px) {
+  body section .cat-row button {
+    font-size: 0.7em;
+  }
 }
 body section .cat-row button:hover {
   background-color: rgba(200, 200, 200, 0.5);

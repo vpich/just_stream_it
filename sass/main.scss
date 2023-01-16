@@ -1,3 +1,13 @@
+$breakpoints: (
+    mobile: 599px
+);
+
+@mixin mobile-only {
+    @media screen and (max-width: map-get($breakpoints, mobile)){
+        @content;
+    }
+}
+
 body {
     background: linear-gradient(0deg, #a8deec 0%, #14353d 100%);
     font-family: sans-serif;
@@ -16,13 +26,25 @@ body {
         z-index: 20;
         border-radius: 5px;
         top: 0px;
+        @include mobile-only{
+            flex-direction: column;
+            height: auto;
+        }
         h1 {
             margin: 20px;
             color: white;
+            @include mobile-only{
+                margin: auto;
+            }
         }
         ul {
             :hover {
                 background-color: #266b7c;
+            }
+            @include mobile-only{
+                margin: auto;
+                padding: unset;
+
             }
             li {
                 display: flex;
@@ -44,6 +66,9 @@ body {
     main {
         width: 90vw;
         margin: auto;
+        @include mobile-only{
+            width: 98%;
+        }
     }
 
     #best_movie {
@@ -61,12 +86,20 @@ body {
 //         margin: 50px 20px 0px 20px;
         margin-top: 50px;
         padding: 0px;
+        @include mobile-only{
+            margin-top: 100px;
+            font-size: 2em;
+            flex-direction: column-reverse;
+        }
         div {
             text-align: center;
             display: flex;
             flex-direction: column;
             align-self: center;
             width: 30%;
+            @include mobile-only{
+                width: 90%;
+            }
             button {
                 font-size: 0.4em;
                 align-self: center;
@@ -75,6 +108,9 @@ body {
                 box-shadow: 2px 2px 2px #8d8d8d;
                 border: 0px;
                 padding: 5px 15px;
+                @include mobile-only{
+                    margin: auto;
+                }
                 &:hover {
                     -webkit-filter: brightness(70%);
                     cursor: pointer;
@@ -94,6 +130,10 @@ body {
             border-radius: 10px;
             box-shadow: 5px 5px 5px rgba(0, 0, 0, .5);
             align-self: center;
+            @include mobile-only{
+                width: 50%;
+                height: auto;
+            }
         }
     }
 
@@ -105,6 +145,9 @@ body {
         .cat-row {
             display: inline-flex;
             padding: 5px;
+            @include mobile-only{
+                padding: 0;
+            }
             button{
                 background-color: rgba(100, 100, 100, 0.5);
                 border: none;
@@ -115,6 +158,9 @@ body {
                 cursor: pointer;
                 border-radius: 5px;
                 box-shadow: 2px 2px 2px rgba(0, 0, 0, .5);
+                @include mobile-only{
+                    font-size: 0.7em;
+                }
                 &:hover {
                     background-color: rgba(200, 200, 200, 0.5);
                 }
