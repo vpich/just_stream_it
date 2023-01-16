@@ -111,7 +111,6 @@ async function slide_animation(action, genre, genre_str, category_click){
 }
 
 function previous_movies_selection(genre, genre_str, category_click) {
-//    click_function = category_click
     console.log(category_click)
     if (category_click > 0) {
         category_click -= 1
@@ -126,18 +125,17 @@ function previous_movies_selection(genre, genre_str, category_click) {
 
 function next_movies_selection(genre, genre_str, category_click) {
     console.log(genre, genre_str, category_click)
-    number_click = category_click
-    number_click += 1
+    category_click += 1
     genre.forEach((image, index) => {
-        replaceImage(genre_str, index+=(7 * number_click), image)
+        replaceImage(genre_str, index+=(7 * category_click), image)
     })
-    console.log(number_click)
-    return number_click
+    console.log(category_click)
+    return category_click
 }
 
 const best_movies_button_previous = document.querySelector("#best_rated > .cat-row > button.previous")
 best_movies_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, best_movies, "", best_rated_click).then(reponse => {
+    slide_animation(previous_movies_selection, best_movies, "", best_rated_click).then(response => {
         console.log(response);
         best_rated_click = response;
     })
@@ -149,7 +147,6 @@ best_movies_button_next.addEventListener("click", function() {
         console.log(response);
         best_rated_click = response;
     })
-//    console.log(best_rated_click)
 })
 
 //
@@ -159,12 +156,18 @@ const animation = document.querySelectorAll("#Animation > .cat-row > .slider > i
 
 const animation_button_previous = document.querySelector("#Animation > .cat-row > button.previous")
 animation_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, animation, "Animation", animation_click)
+    slide_animation(previous_movies_selection, animation, "Animation", animation_click).then(response => {
+        console.log(response)
+        animation_click = response
+    })
 })
 
 const animation_button_next = document.querySelector("#Animation > .cat-row > button.next")
 animation_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, animation, "Animation", animation_click)
+    slide_animation(next_movies_selection, animation, "Animation", animation_click).then(response => {
+        console.log(response)
+        animation_click = response
+    })
 })
 
 //
@@ -175,12 +178,18 @@ const comedy = document.querySelectorAll("#Comedy > .cat-row > .slider > img")
 
 const comedy_button_previous = document.querySelector("#Comedy > .cat-row > button.previous")
 comedy_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, comedy, "Comedy", comedy_click)
+    slide_animation(previous_movies_selection, comedy, "Comedy", comedy_click).then(response => {
+        console.log(response)
+        comedy_click = response
+    })
 })
 
 const comedy_button_next = document.querySelector("#Comedy > .cat-row > button.next")
 comedy_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, comedy, "Comedy", comedy_click)
+    slide_animation(next_movies_selection, comedy, "Comedy", comedy_click).then(response => {
+        console.log(response)
+        comedy_click = response
+    })
 })
 //
 // Slides des Sci-Fi
@@ -190,12 +199,18 @@ const sci_fi = document.querySelectorAll("#Sci-Fi > .cat-row > .slider > img")
 
 const sci_fi_button_previous = document.querySelector("#Sci-Fi > .cat-row > button.previous")
 sci_fi_button_previous.addEventListener("click", function() {
-    slide_animation(previous_movies_selection, sci_fi, "Sci-Fi", scifi_click)
+    slide_animation(previous_movies_selection, sci_fi, "Sci-Fi", scifi_click).then(response => {
+        console.log(response)
+        scifi_click = response
+    })
 })
 
 const sci_fi_button_next = document.querySelector("#Sci-Fi > .cat-row > button.next")
 sci_fi_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, sci_fi, "Sci-Fi", scifi_click)
+    slide_animation(next_movies_selection, sci_fi, "Sci-Fi", scifi_click).then(response => {
+        console.log(response)
+        scifi_click = response
+    })
 })
 
 //let sliders = [{
