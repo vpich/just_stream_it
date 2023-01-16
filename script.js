@@ -1,5 +1,5 @@
 const BASE_URL = "http://localhost:8000/api/v1/titles/"
-const genre_filter = "genre="
+const GENRE_FILTER = "genre="
 const SORT_BY_RATING = "sort_by=-imdb_score"
 const PAGE_FILTER = "page="
 
@@ -50,9 +50,10 @@ function replaceImage(genre, fetchedFilmIndex, new_image) {
         page = "1"
     } else {
         page = Math.ceil((fetchedFilmIndex + 1) / 5)
+//        console.log(page, fetchedFilmIndex)
         fetchedFilmIndex = fetchedFilmIndex % 5
     }
-    let genres_url = BASE_URL + "?" + genre_filter + genre + "&" + SORT_BY_RATING + "&" + PAGE_FILTER + page
+    let genres_url = BASE_URL + "?" + GENRE_FILTER + genre + "&" + SORT_BY_RATING + "&" + PAGE_FILTER + page
 
     fetch(genres_url).then(function(res) {
         return res.json()
@@ -101,7 +102,7 @@ async function slide_animation(action, genre, genre_str, category_click){
         image.classList.remove("active")
     })
     click_function = action(genre, genre_str, category_click)
-    console.log(click_function)
+//    console.log(click_function)
     await sleep(150)
     genre.forEach((image) => {
         image.classList.add("active")
@@ -110,38 +111,45 @@ async function slide_animation(action, genre, genre_str, category_click){
 }
 
 function previous_movies_selection(genre, genre_str, category_click) {
-    click_function = category_click
-    console.log(click_function)
-    if (click_function > 0) {
-        click_function -= 1
+//    click_function = category_click
+    console.log(category_click)
+    if (category_click > 0) {
+        category_click -= 1
         genre.forEach((image, index) => {
-            replaceImage(genre_str, index+=(7 * click_function), image)
+            replaceImage(genre_str, index+=(7 * category_click), image)
         })
     } else {
     console.log("On est au début")
     }
-    return click_function
+    return category_click
 }
 
 function next_movies_selection(genre, genre_str, category_click) {
-    click_function = category_click.result
-    click_function += 1
+    console.log(genre, genre_str, category_click)
+    number_click = category_click
+    number_click += 1
     genre.forEach((image, index) => {
-        replaceImage(genre_str, index+=(7 * click_function), image)
+        replaceImage(genre_str, index+=(7 * number_click), image)
     })
-    console.log(click_function)
-    return click_function
+    console.log(number_click)
+    return number_click
 }
 
 const best_movies_button_previous = document.querySelector("#best_rated > .cat-row > button.previous")
 best_movies_button_previous.addEventListener("click", function() {
-    best_rated_click = slide_animation(previous_movies_selection, best_movies, "", best_rated_click)
+    slide_animation(previous_movies_selection, best_movies, "", best_rated_click).then(reponse => {
+        console.log(response);
+        best_rated_click = response;
+    })
 })
 
 const best_movies_button_next = document.querySelector("#best_rated > .cat-row > button.next")
 best_movies_button_next.addEventListener("click", function() {
-    best_rated_click = slide_animation(next_movies_selection, best_movies, "", best_rated_click)
-    console.log(best_rated_click)
+    slide_animation(next_movies_selection, best_movies, "", best_rated_click).then(response => {
+        console.log(response);
+        best_rated_click = response;
+    })
+//    console.log(best_rated_click)
 })
 
 //
