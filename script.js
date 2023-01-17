@@ -83,9 +83,8 @@ genre_list.forEach(function(genre) {
 })
 
 //
-//Slide des meilleurs films
+//Sliders des meilleurs films pour toutes les catégories
 //
-const best_movies = document.querySelectorAll(`#best_rated > .cat-row > .slider > img`)
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -100,6 +99,7 @@ let scifi_click = 0
 async function slide_animation(action, genre, genre_str, category_click){
     genre.forEach((image) => {
         image.classList.remove("active")
+//        image.src = "images/film-1.jpg"
     })
     number_click = action(genre, genre_str, category_click)
     await sleep(150)
@@ -168,15 +168,6 @@ sliders.forEach(function(slider) {
     })
 })
 
-
-const sci_fi_button_next = document.querySelector("#Sci-Fi > .cat-row > button.next")
-sci_fi_button_next.addEventListener("click", function() {
-    slide_animation(next_movies_selection, sci_fi, "Sci-Fi", scifi_click).then(response => {
-        console.log(response)
-        scifi_click = response
-    })
-})
-
 //
 // Gestion fenêtre modale
 //
@@ -184,13 +175,16 @@ sci_fi_button_next.addEventListener("click", function() {
 const best_movie_button = document.querySelector("#best_movie > div > button")
 const modal = document.getElementById("modal")
 const modal_button = document.querySelector("#modal-header > div > button")
+const modal_background = document.getElementById("modal-background")
 
 best_movie_button.addEventListener("click", function() {
     modal.style.display = "block";
+    modal_background.style.display = "block";
 })
 
-modal_button.addEventListener("click", function() {
+modal_button.addEventListener("click", function() {modal_background.display = "block";
     modal.style.display = "none";
+    modal_background.style.display = "none";
 })
 
 const all_images = document.querySelectorAll("img")
@@ -198,6 +192,7 @@ const all_images = document.querySelectorAll("img")
 all_images.forEach((image) => {
     image.addEventListener("click", function() {
         modal.style.display = "block";
+        modal_background.style.display = "block";
         const id = image.getAttribute("data-id")
         fetch(`${BASE_URL}${id}`).then(function(res) {
             return res.json()
