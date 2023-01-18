@@ -7,7 +7,7 @@ const PAGE_FILTER = "page="
 //  1 - Gestion slides
 //  2 - Gestion fenêtre modale
 
-const genre_list = ["best_rated", "Animation", "Comedy", "Sci-Fi"]
+const genre_list = ["BEST", "Animation", "Comedy", "Sci-Fi"]
 
 //
 //Gestion et affichage du meilleur film en haut de page
@@ -36,7 +36,7 @@ function get_best_movie_info() {
 }
 
 get_best_movie_info()
-replaceImage("", 0, best_movie_image)
+replaceImage("BEST", 0, best_movie_image)
 
 //
 // Remplacement des images dans chaque catégorie
@@ -50,36 +50,35 @@ function replaceImage(genre, fetchedFilmIndex, new_image) {
         page = "1"
     } else {
         page = Math.ceil((fetchedFilmIndex + 1) / 5)
-//        console.log(page, fetchedFilmIndex)
         fetchedFilmIndex = fetchedFilmIndex % 5
     }
-    let genres_url = BASE_URL + "?" + GENRE_FILTER + genre + "&" + SORT_BY_RATING + "&" + PAGE_FILTER + page
+    let genres_url = BASE_URL + "?" + SORT_BY_RATING + "&" + PAGE_FILTER + page
+    if (genre != "BEST") {
+        genres_url += "&"+ GENRE_FILTER + genre
+    }
 
     fetch(genres_url).then(function(res) {
         return res.json()
     }).then(function(data){
-        for (movie in data) {
-            const image_url = data["results"][fetchedFilmIndex]["image_url"]
-            const image_id = data["results"][fetchedFilmIndex]["id"]
-            new_image.src = image_url
-            new_image.setAttribute("data-id", image_id)
-        }
+        const image_url = data["results"][fetchedFilmIndex]["image_url"]
+        const image_id = data["results"][fetchedFilmIndex]["id"]
+        new_image.src = image_url
+        new_image.setAttribute("data-id", image_id)
     })
 }
 
 function replace_images_in_categories(genre, html_images) {
     html_images.forEach((image, index) => {
+        if (genre == "BEST") {
+            index += 1
+        }
         replaceImage(genre, index, image)
     })
 }
 
 genre_list.forEach(function(genre) {
     const html_images = document.querySelectorAll(`#${genre} > .cat-row > .slider > img`)
-    if (genre == "best_rated") {
-        replace_images_in_categories("", html_images)
-    } else {
-        replace_images_in_categories(genre, html_images)
-    }
+    replace_images_in_categories(genre, html_images)
 })
 
 //
@@ -96,14 +95,14 @@ let animation_click = 0
 let comedy_click = 0
 let scifi_click = 0
 
-async function slide_animation(action, genre, genre_str, category_click){
-    genre.forEach((image) => {
+async function slide_animation(action, images_list, genre_str, category_click){
+    images_list.forEach((image) => {
         image.classList.remove("active")
 //        image.src = "images/film-1.jpg"
     })
-    number_click = action(genre, genre_str, category_click)
+    number_click = action(images_list, genre_str, category_click)
     await sleep(150)
-    genre.forEach((image) => {
+    images_list.forEach((image) => {
         image.classList.add("active")
     })
     return number_click
@@ -113,7 +112,11 @@ function previous_movies_selection(genre, genre_str, category_click) {
     if (category_click > 0) {
         category_click -= 1
         genre.forEach((image, index) => {
+            if (genre_str === "BEST") {
+                index += 1;
+            }
             replaceImage(genre_str, index+=(7 * category_click), image)
+
         })
     } else {
     console.log("On est au début")
@@ -121,17 +124,21 @@ function previous_movies_selection(genre, genre_str, category_click) {
     return category_click
 }
 
-function next_movies_selection(genre, genre_str, category_click) {
+function next_movies_selection(images_list, genre_str, category_click) {
     category_click += 1
-    genre.forEach((image, index) => {
-        replaceImage(genre_str, index+=(7 * category_click), image)
+    images_list.forEach((image, index) => {
+        index += (7 * category_click)
+        if (genre_str === "BEST") {
+            index += 1;
+        }
+        replaceImage(genre_str, index, image)
     })
     return category_click
 }
 
 let sliders = [{
-    querySelector: "#best_rated > .cat-row",
-    name: "",
+    querySelector: "#BEST > .cat-row",
+    name: "BEST",
     category_click: best_rated_click
 }, {
     querySelector: "#Animation > .cat-row",
@@ -149,11 +156,11 @@ let sliders = [{
 
 
 sliders.forEach(function(slider) {
-    const genre = document.querySelectorAll(`${slider["querySelector"]} > .slider > img`)
+    const images_list = document.querySelectorAll(`${slider["querySelector"]} > .slider > img`)
 
     const genre_button_previous = document.querySelector(`${slider["querySelector"]} > button.previous`)
     genre_button_previous.addEventListener("click", function() {
-        slide_animation(previous_movies_selection, genre, slider["name"], slider["category_click"]).then(response => {
+        slide_animation(previous_movies_selection, images_list, slider["name"], slider["category_click"]).then(response => {
             slider["category_click"] = response
             console.log(slider["category_click"])
         })
@@ -161,7 +168,7 @@ sliders.forEach(function(slider) {
 
     const genre_button_next = document.querySelector(`${slider["querySelector"]} > button.next`)
     genre_button_next.addEventListener("click", function() {
-        slide_animation(next_movies_selection, genre, slider["name"], slider["category_click"]).then(response => {
+        slide_animation(next_movies_selection, images_list, slider["name"], slider["category_click"]).then(response => {
             slider["category_click"] = response;
             console.log(slider["category_click"]);
         })
