@@ -3,10 +3,6 @@ const GENRE_FILTER = "genre="
 const SORT_BY_RATING = "sort_by=-imdb_score"
 const PAGE_FILTER = "page="
 
-//A améliorer
-//  1 - Gestion slides
-//  2 - Gestion fenêtre modale
-
 const genre_list = ["BEST", "Animation", "Comedy", "Sci-Fi"]
 
 //
@@ -233,17 +229,53 @@ all_images.forEach((image) => {
     })
 })
 
-dictionnaire_pour_modale = [
-    "title",
-    "image_url",
-    "genres",
-    "date_published",
-    "rated",
-    "imdb_score",
-    "directors",
-    "actors",
-    "duration",
-    "countries",
-    "avg_vote",
-    "long_description"
-]
+//dictionnaire_pour_modale = [
+//    "title",
+//    "image_url",
+//    "genres",
+//    "date_published",
+//    "rated",
+//    "imdb_score",
+//    "directors",
+//    "actors",
+//    "duration",
+//    "countries",
+//    "avg_vote",
+//    "long_description"
+//]
+
+const infos_button = document.querySelector("#best_movie > div > button")
+
+infos_button.addEventListener("click", function() {
+    modal.style.display = "block";
+    modal_background.style.display = "block";
+    const id = best_movie_image.getAttribute("data-id")
+    fetch(`${BASE_URL}${id}`).then(function(res) {
+        return res.json()
+    }).then(function(data){
+        const title = document.getElementById("modal-title")
+        title.innerHTML = data["title"]
+        const best_movie_image = document.querySelector("#modal-image > img")
+        best_movie_image.src = data["image_url"]
+        const genre = document.getElementById("genre")
+        genre.innerHTML = "Genres: " + data["genres"]
+        const release = document.getElementById("release")
+        release.innerHTML = "Date de sortie: " + data["date_published"]
+        const rated = document.getElementById("rate")
+        rated.innerHTML = "Rated: " + data["rated"]
+        const score = document.getElementById("imdb-score")
+        score.innerHTML = "Score IMBD: " + data["imdb_score"]
+        const directors = document.getElementById("director")
+        director.innerHTML = "Réalisateur: " + data["directors"]
+        const actors = document.getElementById("actors")
+        actors.innerHTML = "Liste des acteurs: " + data["actors"]
+        const duration = document.getElementById("duration")
+        duration.innerHTML = "Durée du film: " + data["duration"]
+        const origin = document.getElementById("origin")
+        origin.innerHTML = "Pays d'origine: " + data["countries"]
+        const box_office = document.getElementById("box-office")
+        box_office.innerHTML = "Résultat au Box Office: " + data["avg_vote"]
+        const description = document.getElementById("long_description")
+        description.innerHTML = "Description:<br/>" + data["long_description"]
+    })
+})
