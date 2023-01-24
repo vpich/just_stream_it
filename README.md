@@ -37,7 +37,7 @@ Depuis la racine du répertoire interface_utilisateur_application_web, ouvrez le
 - Pour lancer la compilation Sass vers le CSS, tapez dans le terminal:
     - `npm run sass`
 - Caroussel pour faire défiler les films dans chaque catégorie grâce à des boutons flèches
-- Affichage d'une fenêtre modale lorsque l'on clique sur l'image d'un film
+- Affichage d'une fenêtre modale présentant les informations d'un film lorsque l'on clique sur son image
 
 ## Author
 
