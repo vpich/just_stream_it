@@ -5,24 +5,29 @@ const PAGE_FILTER = "page="
 
 const genre_list = ["BEST", "Animation", "Comedy", "Sci-Fi"]
 
-//
-//Gestion et affichage du meilleur film en haut de page
-//
+/*
+Gestion et affichage du meilleur film en haut de page
+*/
 
 const best_movie_image = document.querySelector("#best_movie > img")
 const best_movie_title = document.querySelector("#best_movie > div > a")
 const best_movie_description = document.getElementById("description")
 
-function get_best_movie_info() {
+function getBestMovieInfo() {
+    // Va chercher dans l'API, depuis la 1ère page des films triés selon leur score IMDB,
+    // et permet d'afficher dans l'HTML en premier élément de page, le meilleur film avec son titre et sa description
+
     const url = BASE_URL + "?" + SORT_BY_RATING
 
     fetch(url).then(function(res) {
         return res.json()
     }).then(function(data){
+        // Sélection du premier film après l'application du filtre
         best_movie_url = data["results"][0]["url"]
         fetch(best_movie_url).then(function(res) {
             return res.json()
         }).then(function(data){
+            // Récupération du titre et de la description courte pour l'incorporer au code HTML
             const db_title = data["title"]
             const db_description = data["description"]
             title.innerHTML = db_title
@@ -31,17 +36,19 @@ function get_best_movie_info() {
     })
 }
 
-get_best_movie_info()
-replaceImage("BEST", 0, best_movie_image)
+getBestMovieInfo()
 
-//
-// Remplacement des images dans chaque catégorie
-//
+/*
+Remplacement des images dans chaque catégorie
+*/
 
 function replaceImage(genre, fetchedFilmIndex, new_image) {
+    // Permet d'afficher l'image d'un film sur le site, et d'ajouter en attribut l'identifiant unique du film
 
     let page = ""
 
+    // Permets de récupérer la bonne page dans l'API en fonction de l'index du film
+    // (l'API ne peut afficher que 5 films par page)
     if (fetchedFilmIndex < 5) {
         page = "1"
     } else {
@@ -56,6 +63,7 @@ function replaceImage(genre, fetchedFilmIndex, new_image) {
     fetch(genres_url).then(function(res) {
         return res.json()
     }).then(function(data){
+        // Récupération de l'image et de l'identifiant unique du film
         const image_url = data["results"][fetchedFilmIndex]["image_url"]
         const image_id = data["results"][fetchedFilmIndex]["id"]
         new_image.src = image_url
@@ -63,8 +71,12 @@ function replaceImage(genre, fetchedFilmIndex, new_image) {
     })
 }
 
-function replace_images_in_categories(genre, html_images) {
+replaceImage("BEST", 0, best_movie_image)
+
+function replaceImagesInCategories(genre, html_images) {
+    // Pour chaque film d'une catégorie donnée, permet d'afficher l'image associée sur le site
     html_images.forEach((image, index) => {
+        // Pour la catégorie des meilleurs films, retire le 1er film qui est déjà affichée en haut de page
         if (genre == "BEST") {
             index += 1
         }
@@ -73,25 +85,29 @@ function replace_images_in_categories(genre, html_images) {
 }
 
 genre_list.forEach(function(genre) {
+    // Applique l'affichage d'image par catégorie pour chacune d'entre elle
     const html_images = document.querySelectorAll(`#${genre} > .cat-row > .slider > img`)
-    replace_images_in_categories(genre, html_images)
+    replaceImagesInCategories(genre, html_images)
 })
 
-//
-//Sliders des meilleurs films pour toutes les catégories
-//
+/*
+Sliders des meilleurs films pour toutes les catégories
+*/
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+// Définition d'une variable pour chaque compteur de clique en fonction de leur catégorie
 let best_rated_click = 0
 let animation_click = 0
 let comedy_click = 0
 let scifi_click = 0
 
-async function slide_animation(action, images_list, genre_str, category_click){
+async function slideAnimation(action, images_list, genre_str, category_click){
+    // Permet d'activer puis de réactiver les images affichés
+    // pour que l'animation du carroussel puisse se lancer à chaque chargement de nouvelles images
+
     images_list.forEach((image) => {
         image.classList.remove("active")
 //        image.src = "images/film-1.jpg"
@@ -101,10 +117,13 @@ async function slide_animation(action, images_list, genre_str, category_click){
     images_list.forEach((image) => {
         image.classList.add("active")
     })
+    // Renvoie le nombre de clique suite à l'application de la fonction "action" qui l'incrémente ou le décrémente
     return number_click
 }
 
-function previous_movies_selection(genre, genre_str, category_click) {
+function previousMoviesSelection(genre, genre_str, category_click) {
+    // Permet d'appliquer le changement des images et de récupérer les identifiants des 7 films précédents
+    // et de décrémenter le compteur de clique de -1
     if (category_click > 0) {
         category_click -= 1
         genre.forEach((image, index) => {
@@ -115,12 +134,15 @@ function previous_movies_selection(genre, genre_str, category_click) {
 
         })
     } else {
+    // Si le compteur de clique est à zéro, aucun changement d'image n'est effectué
     console.log("On est au début")
     }
     return category_click
 }
 
-function next_movies_selection(images_list, genre_str, category_click) {
+function nextMoviesSelection(images_list, genre_str, category_click) {
+    // Permet d'appliquer le changement des images et de récupérer les identifiants des 7 films suivants
+    // et d'incrémenter le compteur de clique de +1
     category_click += 1
     images_list.forEach((image, index) => {
         index += (7 * category_click)
@@ -132,6 +154,7 @@ function next_movies_selection(images_list, genre_str, category_click) {
     return category_click
 }
 
+// Définition de variable appartenant à chaque catégorie/carroussel
 let sliders = [{
     querySelector: "#BEST > .cat-row",
     name: "BEST",
@@ -156,7 +179,7 @@ sliders.forEach(function(slider) {
 
     const genre_button_previous = document.querySelector(`${slider["querySelector"]} > button.previous`)
     genre_button_previous.addEventListener("click", function() {
-        slide_animation(previous_movies_selection, images_list, slider["name"], slider["category_click"]).then(response => {
+        slideAnimation(previousMoviesSelection, images_list, slider["name"], slider["category_click"]).then(response => {
             slider["category_click"] = response
             console.log(slider["category_click"])
         })
@@ -164,7 +187,7 @@ sliders.forEach(function(slider) {
 
     const genre_button_next = document.querySelector(`${slider["querySelector"]} > button.next`)
     genre_button_next.addEventListener("click", function() {
-        slide_animation(next_movies_selection, images_list, slider["name"], slider["category_click"]).then(response => {
+        slideAnimation(nextMoviesSelection, images_list, slider["name"], slider["category_click"]).then(response => {
             slider["category_click"] = response;
             console.log(slider["category_click"]);
         })
