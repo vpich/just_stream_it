@@ -275,7 +275,7 @@ body {
             #modal-image{
                 @include mobile-only {
                     max-width: 90%;
-                    self-align: center;
+                    align-self: center;
                     display: flex;
                     justify-content: space-around;
                     margin: auto;

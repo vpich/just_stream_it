@@ -288,7 +288,7 @@ body section#modal #modal-header {
 @media screen and (max-width: 599px) {
   body section#modal #modal-image {
     max-width: 90%;
-    self-align: center;
+    align-self: center;
     display: flex;
     justify-content: space-around;
     margin: auto;
